@@ -10,6 +10,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     background-color: #fff8f0;
+    scroll-behavior: smooth; /* 增加平滑滾動效果 */
 }
 
 /* Header */
@@ -25,27 +26,18 @@ nav {
     background-color: #d2691e;
     padding: 12px;
     display: flex;
-    justify-content: center; /* 置中 */
-    gap: 30px; /* 間距平均 */
+    justify-content: center; 
+    gap: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: #ffe4c4;
-    text-decoration: underline;
-}
-
-nav a {
-    color: white;
-    margin: 15px;
-    text-decoration: none;
-    font-weight: bold;
+    padding: 5px 15px;
     transition: 0.3s;
 }
 
@@ -57,6 +49,38 @@ nav a:hover {
 /* Section */
 section {
     padding: 30px;
+    text-align: center;
+}
+
+/* Menu Grid Style - 新增的部分 */
+.menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu-item {
+    flex: 1 1 calc(33.333% - 40px); /* 電腦版一排三張 */
+    min-width: 280px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+}
+
+.menu-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
 }
 
 /* Card */
@@ -67,7 +91,7 @@ section {
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: 0.3s;
-    max-width: 400px; /* 控制卡片寬度 */
+    max-width: 400px;
 }
 
 .card:hover {
@@ -77,8 +101,8 @@ section {
 /* Product Image */
 .product-img {
     width: 100%;
-    height: 220px; /* 固定高度 */
-    object-fit: cover; /* 不變形 */
+    height: 220px;
+    object-fit: cover;
     border-radius: 10px;
     margin-bottom: 10px;
 }
@@ -105,6 +129,14 @@ footer {
     color: white;
     text-align: center;
     padding: 15px;
+    margin-top: 30px;
+}
+
+/* 手機版適應 */
+@media (max-width: 768px) {
+    .menu-item {
+        flex: 1 1 100%; /* 手機一排一張 */
+    }
 }
 </style>
 </head>
@@ -118,6 +150,7 @@ footer {
 
 <nav>
     <a href="#about">About Us</a>
+    <a href="#menu">Menu</a>
     <a href="#products">Products</a>
     <a href="#team">Our Team</a>
 </nav>
@@ -128,6 +161,18 @@ footer {
         <p>A premium dessert boutique in Guangfu New Village</p>
         <p>Specializing in Dubai chocolates, filled with pistachio cream and kunafa</p>
         <p>Their crunchy yet creamy texture offers you an unforgettable indulgence.</p>
+    </div>
+</section>
+
+<section id="menu">
+    <h2>Our Menu</h2>
+    <div class="menu-container">
+        <div class="menu-item"><img src="menu1.webp" alt="Menu 1"></div>
+        <div class="menu-item"><img src="menu2.webp" alt="Menu 2"></div>
+        <div class="menu-item"><img src="menu3.webp" alt="Menu 3"></div>
+        <div class="menu-item"><img src="menu4.webp" alt="Menu 4"></div>
+        <div class="menu-item"><img src="menu5.webp" alt="Menu 5"></div>
+        <div class="menu-item"><img src="menu6.webp" alt="Menu 6"></div>
     </div>
 </section>
 
@@ -157,7 +202,6 @@ footer {
         <p>A premium gift box, perfect for gifting</p>
         <a href="#" class="btn">Buy Now</a>
     </div>
-
 </section>
 
 <section id="team">
@@ -178,4 +222,3 @@ footer {
 
 </body>
 </html>
-

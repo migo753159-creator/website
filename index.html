@@ -10,7 +10,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     background-color: #fff8f0;
-    scroll-behavior: smooth; /* 增加平滑滾動效果 */
+    scroll-behavior: smooth;
 }
 
 /* Header */
@@ -46,14 +46,13 @@ nav a:hover {
     text-decoration: underline;
 }
 
-/* Section */
 section {
     padding: 30px;
     text-align: center;
 }
 
-/* Menu Grid Style - 新增的部分 */
-.menu-container {
+/* 統一的卡片佈局容器 */
+.item-grid-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -62,163 +61,19 @@ section {
     margin: 0 auto;
 }
 
-.menu-item {
-    flex: 1 1 calc(33.333% - 40px); /* 電腦版一排三張 */
+/* Menu 與 Products 共用的卡片樣式 */
+.item-card {
+    flex: 1 1 calc(33.333% - 40px);
     min-width: 280px;
+    max-width: 350px;
     background: white;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: 0.3s;
+    display: flex;
+    flex-direction: column;
 }
 
-.menu-item:hover {
-    transform: translateY(-5px);
-}
-
-.menu-item img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
-}
-
-/* Card */
-.card {
-    background: white;
-    padding: 20px;
-    margin: 15px auto;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: 0.3s;
-    max-width: 400px;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-/* Product Image */
-.product-img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-/* Button */
-.btn {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #8b4513;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    margin-top: 10px;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background-color: #a0522d;
-}
-
-/* Footer */
-footer {
-    background-color: #8b4513;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    margin-top: 30px;
-}
-
-/* 手機版適應 */
-@media (max-width: 768px) {
-    .menu-item {
-        flex: 1 1 100%; /* 手機一排一張 */
-    }
-}
-</style>
-</head>
-
-<body>
-
-<header>
-    <h1>Little Sweet House 🍫</h1>
-    <p>We create trendy and viral desserts inspired by Dubai chocolate.</p>
-</header>
-
-<nav>
-    <a href="#about">About Us</a>
-    <a href="#menu">Menu</a>
-    <a href="#products">Products</a>
-    <a href="#team">Our Team</a>
-</nav>
-
-<section id="about">
-    <h2>About Us</h2>
-    <div class="card">
-        <p>A premium dessert boutique in Guangfu New Village</p>
-        <p>Specializing in Dubai chocolates, filled with pistachio cream and kunafa</p>
-        <p>Their crunchy yet creamy texture offers you an unforgettable indulgence.</p>
-    </div>
-</section>
-
-<section id="menu">
-    <h2>Menu</h2>
-    <div class="menu-container">
-        <div class="menu-item"><img src="IMG_1035.jpeg" alt="DUBAI CHEWY COOKIE"></div>
-        <div class="menu-item"><img src="IMG_1031.jpeg" alt="Kunafa laver"></div>
-        <div class="menu-item"><img src="IMG_1032.jpeg" alt="COOKIES, CHOCOLATE"></div>
-        <div class="menu-item"><img src="IMG_1033.jpeg" alt="MOCHI, BREAD, CROISSANT"></div>
-        <div class="menu-item"><img src="IMG_1034.jpeg" alt="CAKES, DESSERT BOX"></div>
-        <div class="menu-item"><img src="IMG_1036.jpeg" alt=""></div>
-    </div>
-</section>
-
-<section id="products">
-    <h2>Products</h2>
-
-    <div class="card">
-        <img src="IMG_one.webp" class="product-img">
-        <h3>Single Chocolate</h3>
-        <p>NT$120 – NT$180</p>
-        <p>Smooth and rich, melts in your mouth</p>
-        <a href="#" class="btn">Buy Now</a>
-    </div>
-
-    <div class="card">
-        <img src="IMG_four.webp" class="product-img">
-        <h3>Box of 4</h3>
-        <p>NT$450 – NT$650</p>
-        <p>A perfect selection of four, crafted for indulgence.</p>
-        <a href="#" class="btn">Buy Now</a>
-    </div>
-
-    <div class="card">
-        <img src="IMG_six.webp" class="product-img">
-        <h3>Box of 6</h3>
-        <p>NT$650 – NT$900</p>
-        <p>A premium gift box, perfect for gifting</p>
-        <a href="#" class="btn">Buy Now</a>
-    </div>
-</section>
-
-<section id="team">
-    <h2>Our Team</h2>
-    <div class="card">
-        <p>👤 CEO - Eric</p>
-        <p>📱 Marketing - Rina & Prima</p>
-        <p>🍫 Production - Kimberly</p>
-        <p>🚚 Delivery - Migo</p>
-        <p>💰 Finance - Ashley & Phoebe</p>
-    </div>
-</section>
-
-<footer>
-    <p>© 2026 Little Sweet House design by Migo</p>
-    <p>Follow us on Instagram 🍫</p>
-</footer>
-
-</body>
-</html>
+.item-card:hover {
+    transform

@@ -62,13 +62,15 @@ section {
 
 /* Card */
 .item-card {
-    flex: 1 1 280px;
+    flex: 1 1 300px;
     max-width: 350px;
     background: white;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: 0.3s;
+    display: flex;
+    flex-direction: column;
 }
 
 .item-card:hover {
@@ -82,23 +84,54 @@ section {
 
 .item-content {
     padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
-/* 清單樣式 */
+/* 清單樣式優化：改為 Flex 佈局以放入按鈕 */
 .price-list {
     text-align: left;
     background-color: #fdf2e9;
-    padding: 12px;
+    padding: 10px;
     border-radius: 8px;
-    margin: 15px 0;
+    margin: 10px 0;
     border-left: 4px solid #d2691e;
 }
 
-.price-list p {
-    margin: 6px 0;
-    font-size: 0.9em;
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+    border-bottom: 1px dashed #e0d5cb;
+    padding-bottom: 5px;
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.list-item span {
+    font-size: 0.85em;
     color: #5d2e0a;
     font-weight: 500;
+}
+
+/* 小型訂購按鈕 */
+.btn-sm {
+    padding: 4px 8px;
+    background-color: #d2691e;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    font-size: 0.75em;
+}
+
+.btn-sm:hover {
+    background-color: #8b4513;
 }
 
 /* About */
@@ -112,7 +145,7 @@ section {
     line-height: 1.8;
 }
 
-/* Button */
+/* 主按鈕 */
 .btn {
     display: inline-block;
     padding: 10px 15px;
@@ -121,7 +154,7 @@ section {
     border-radius: 8px;
     text-decoration: none;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: auto; /* 確保按鈕在底部對齊 */
     border: none;
     width: 100%;
     font-size: 1em;
@@ -131,55 +164,14 @@ section {
     background-color: #a0522d;
 }
 
-/* Footer */
-footer {
-    background-color: #8b4513;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    margin-top: 50px;
-}
+/* Footer & Modal ... (其餘樣式保持不變) */
+footer { background-color: #8b4513; color: white; text-align: center; padding: 15px; margin-top: 50px; }
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+.modal-content { background: white; margin: 10% auto; padding: 20px; width: 90%; max-width: 400px; border-radius: 12px; text-align: left; }
+.modal input { width: 100%; padding: 8px; margin: 8px 0; box-sizing: border-box; }
+.close { float: right; font-size: 24px; cursor: pointer; }
 
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-}
-
-.modal-content {
-    background: white;
-    margin: 10% auto;
-    padding: 20px;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 12px;
-    text-align: left;
-}
-
-.modal input {
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0;
-    box-sizing: border-box;
-}
-
-.close {
-    float: right;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-@media (max-width: 768px) {
-    .item-card {
-        flex: 1 1 100%;
-    }
-}
+@media (max-width: 768px) { .item-card { flex: 1 1 100%; } }
 </style>
 </head>
 
@@ -210,36 +202,60 @@ footer {
 
         <div class="item-card">
             <img src="IMG_1229.jpeg" class="item-img" alt="Pistachio Croissant">
-            <div class="item-content">    
+            <div class="item-content">
+                <h3>Pistachio Croissant</h3>
+                <p style="font-size: 1.1em; color: #d2691e; font-weight: bold; margin: 5px 0;">NT$120</p>
+                
                 <div class="price-list">
-                    <p>🥐 Croissant NT$100</p>
-                    <p>🍪 Dubai Chewy Cookie (Mochi) NT$100</p>
-                    <p>🍰 Chocolate Pistachio Slice Cake NT$180</p>
+                    <div class="list-item">
+                        <span>🥐 Croissant NT$100</span>
+                        <button class="btn-sm" onclick="openModal('Croissant')">Order</button>
+                    </div>
+                    <div class="list-item">
+                        <span>🍪 Dubai Cookie (Mochi) NT$100</span>
+                        <button class="btn-sm" onclick="openModal('Dubai Cookie (Mochi)')">Order</button>
+                    </div>
+                    <div class="list-item">
+                        <span>🍰 Pistachio Slice Cake NT$180</span>
+                        <button class="btn-sm" onclick="openModal('Pistachio Slice Cake')">Order</button>
+                    </div>
                 </div>
 
-                <button class="btn" onclick="openModal('Pistachio Croissant Set')">Buy Now</button>
+                <button class="btn" onclick="openModal('Pistachio Croissant')">Buy Main Item Now</button>
             </div>
         </div>
 
         <div class="item-card">
             <img src="IMG_1230.jpeg" class="item-img" alt="Dubai Pistachio Mochi">
             <div class="item-content">
+                <h3>Dubai Pistachio Mochi</h3>
+                <p style="font-size: 1.1em; color: #d2691e; font-weight: bold; margin: 5px 0;">NT$100</p>
+                
                 <div class="price-list">
-                    <p>🧂 Saltbread NT$120</p>
-                    <p>🥖 Pan De Dubai NT$100</p>
-                    <p>🍫 Brownies Pistachio Kunafa NT$250</p>
+                    <div class="list-item">
+                        <span>🧂 Saltbread NT$120</span>
+                        <button class="btn-sm" onclick="openModal('Saltbread')">Order</button>
+                    </div>
+                    <div class="list-item">
+                        <span>🥖 Pan De Dubai NT$100</span>
+                        <button class="btn-sm" onclick="openModal('Pan De Dubai')">Order</button>
+                    </div>
+                    <div class="list-item">
+                        <span>🍫 Brownies Kunafa NT$250</span>
+                        <button class="btn-sm" onclick="openModal('Brownies Kunafa')">Order</button>
+                    </div>
                 </div>
 
-                <button class="btn" onclick="openModal('Dubai Pistachio Mochi Set')">Buy Now</button>
+                <button class="btn" onclick="openModal('Dubai Pistachio Mochi')">Buy Main Item Now</button>
             </div>
         </div>
 
         <div class="item-card">
-            <img src="IMG_1036.jpeg" class="item-img" alt="Chocolate Pistachio Cake">
+            <img src="IMG_1036.jpeg" class="item-img" alt="Whole cake">
             <div class="item-content">
                 <h3>Whole cake</h3>
-                <p style="font-size: 1.2em; color: #d2691e; font-weight: bold;">NT$ 900</p>
-                <button class="btn" onclick="openModal('Chocolate Pistachio Cake')" style="margin-top: 20px;">Buy Now</button>
+                <p style="font-size: 1.1em; color: #d2691e; font-weight: bold; margin: 5px 0;">NT$180</p>
+                <div style="flex-grow: 1;"></div> <button class="btn" onclick="openModal('Whole cake')">Buy Now</button>
             </div>
         </div>
 
@@ -248,9 +264,7 @@ footer {
 
 <section id="products">
     <h2>Products</h2>
-
     <div class="item-grid-container">
-
         <div class="item-card">
             <img src="IMG_one.webp" class="item-img">
             <div class="item-content">
@@ -259,7 +273,6 @@ footer {
                 <button class="btn" onclick="openModal('Single Chocolate')">Buy Now</button>
             </div>
         </div>
-
         <div class="item-card">
             <img src="IMG_four.webp" class="item-img">
             <div class="item-content">
@@ -268,16 +281,14 @@ footer {
                 <button class="btn" onclick="openModal('Box of 4')">Buy Now</button>
             </div>
         </div>
-
         <div class="item-card">
             <img src="IMG_six.webp" class="item-img">
             <div class="item-content">
-                <h3>Dubai Chewy Cookie Box of 6 </h3>
+                <h3>Dubai Chewy Cookie Box of 6</h3>
                 <p>NT$650</p>
                 <button class="btn" onclick="openModal('Box of 6')">Buy Now</button>
             </div>
         </div>
-
     </div>
 </section>
 
@@ -296,26 +307,19 @@ footer {
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <h2>Order Now 🛒</h2>
-
         <form id="orderForm">
             <label>Product</label>
             <input type="text" id="product" readonly>
-
             <label>Name</label>
             <input type="text" required>
-
             <label>Phone</label>
             <input type="text" required>
-
             <label>Address</label>
             <input type="text" required>
-
             <label>Quantity</label>
             <input type="number" min="1" required>
-
             <button type="submit" class="btn">Submit Order</button>
         </form>
-
         <p id="successMsg" style="display:none;color:green;margin-top:15px;text-align:center;font-weight:bold;">
             ✅ Order submitted!
         </p>

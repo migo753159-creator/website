@@ -89,7 +89,7 @@ section {
     flex-grow: 1;
 }
 
-/* 清單樣式優化：改為 Flex 佈局以放入按鈕 */
+/* 清單樣式 */
 .price-list {
     text-align: left;
     background-color: #fdf2e9;
@@ -154,7 +154,7 @@ section {
     border-radius: 8px;
     text-decoration: none;
     cursor: pointer;
-    margin-top: auto; /* 確保按鈕在底部對齊 */
+    margin-top: auto; 
     border: none;
     width: 100%;
     font-size: 1em;
@@ -164,11 +164,10 @@ section {
     background-color: #a0522d;
 }
 
-/* Footer & Modal ... (其餘樣式保持不變) */
 footer { background-color: #8b4513; color: white; text-align: center; padding: 15px; margin-top: 50px; }
 .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
 .modal-content { background: white; margin: 10% auto; padding: 20px; width: 90%; max-width: 400px; border-radius: 12px; text-align: left; }
-.modal input { width: 100%; padding: 8px; margin: 8px 0; box-sizing: border-box; }
+.modal input { width: 100%; padding: 8px; margin: 8px 0; box-sizing: border-box; display: block; }
 .close { float: right; font-size: 24px; cursor: pointer; }
 
 @media (max-width: 768px) { .item-card { flex: 1 1 100%; } }
@@ -197,9 +196,7 @@ footer { background-color: #8b4513; color: white; text-align: center; padding: 1
 
 <section id="menu">
     <h2>Our Menu</h2>
-
     <div class="item-grid-container">
-
         <div class="item-card">
             <img src="IMG_1229.jpeg" class="item-img" alt="Pistachio Croissant">
             <div class="item-content">
@@ -217,7 +214,6 @@ footer { background-color: #8b4513; color: white; text-align: center; padding: 1
                         <button class="btn-sm" onclick="openModal('Pistachio Slice Cake')">Order</button>
                     </div>
                 </div>
-
                 <button class="btn" onclick="openModal('Croissant')">Buy Main Item Now</button>
             </div>
         </div>
@@ -239,7 +235,6 @@ footer { background-color: #8b4513; color: white; text-align: center; padding: 1
                         <button class="btn-sm" onclick="openModal('Brownies Kunafa')">Order</button>
                     </div>
                 </div>
-
                 <button class="btn" onclick="openModal('Brownies Kunafa')">Buy Main Item Now</button>
             </div>
         </div>
@@ -249,10 +244,10 @@ footer { background-color: #8b4513; color: white; text-align: center; padding: 1
             <div class="item-content">
                 <h3>Whole cake</h3>
                 <p style="font-size: 1.1em; color: #d2691e; font-weight: bold; margin: 5px 0;">NT$900</p>
-                <div style="flex-grow: 1;"></div> <button class="btn" onclick="openModal('Whole cake')">Buy Now</button>
+                <div style="flex-grow: 1;"></div> 
+                <button class="btn" onclick="openModal('Whole cake')">Buy Now</button>
             </div>
         </div>
-
     </div>
 </section>
 
@@ -302,23 +297,18 @@ footer { background-color: #8b4513; color: white; text-align: center; padding: 1
         <span class="close" onclick="closeModal()">&times;</span>
         <h2>Order Now 🛒</h2>
         <form id="orderForm">
-    <label>Product</label>
-    <input type="text" id="order_product" name="product" readonly>
-    
-    <label>Name</label>
-    <input type="text" name="user_name" required>
-    
-    <label>Phone</label>
-    <input type="text" name="user_phone" required>
-    
-    <label>Address</label>
-    <input type="text" name="user_address" required>
-    
-    <label>Quantity</label>
-    <input type="number" name="quantity" min="1" required>
-    
-    <button type="submit" id="submitBtn" class="btn">Submit Order</button>
-</form>
+            <label>Product</label>
+            <input type="text" id="order_product" name="product" readonly>
+            <label>Name</label>
+            <input type="text" name="user_name" required>
+            <label>Phone</label>
+            <input type="text" name="user_phone" required>
+            <label>Address</label>
+            <input type="text" name="user_address" required>
+            <label>Quantity</label>
+            <input type="number" name="quantity" min="1" required>
+            <button type="submit" id="submitBtn" class="btn">Submit Order</button>
+        </form>
         <p id="successMsg" style="display:none;color:green;margin-top:15px;text-align:center;font-weight:bold;">
             ✅ Order submitted!
         </p>
@@ -331,17 +321,34 @@ footer { background-color: #8b4513; color: white; text-align: center; padding: 1
 </footer>
 
 <script>
+// 控制彈窗開關的函數 (之前漏掉的部分)
+function openModal(productName) {
+    document.getElementById("orderModal").style.display = "block";
+    document.getElementById("order_product").value = productName;
+    document.getElementById("successMsg").style.display = "none";
+}
+
+function closeModal() {
+    document.getElementById("orderModal").style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == document.getElementById("orderModal")) {
+        closeModal();
+    }
+}
+
 // 處理下單
 document.getElementById("orderForm").addEventListener("submit", function(e) {
     e.preventDefault();
     
     const submitBtn = document.getElementById("submitBtn");
-    const scriptURL = https://script.google.com/macros/s/AKfycbzzj5hZO5tLAWffvfiP1QggVOOf0aY-K16BPodJjUxuIlAJbn_buxMjLpRJg91u5Ccn/exec; // 
+    // 修正：網址必須加上引號
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzzj5hZO5tLAWffvfiP1QggVOOf0aY-K16BPodJjUxuIlAJbn_buxMjLpRJg91u5Ccn/exec'; 
 
     submitBtn.innerText = "Processing...";
     submitBtn.disabled = true;
 
-    // 使用 fetch 傳送資料到 Google Sheets
     fetch(scriptURL, { 
         method: 'POST', 
         body: new FormData(this)
